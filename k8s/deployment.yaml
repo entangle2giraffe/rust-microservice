@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-microservice-deployment
+  namespace: sandbox-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rust-microservice
+  template:
+    metadata:
+      labels:
+        app: rust-microservice
+    spec:
+      containers:
+      - name: rust-microservice
+        image: yuuhatevim/rust-microservice
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
